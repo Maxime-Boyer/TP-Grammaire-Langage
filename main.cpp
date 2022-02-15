@@ -3,7 +3,11 @@
 
 
 int main(void) {
-   string chaine("(1+34)*123");
+
+   string chaine;
+   
+   cout << "Entrez une expression à analyser:" << endl;
+   cin >> chaine;
 
    Lexer l(chaine);
 

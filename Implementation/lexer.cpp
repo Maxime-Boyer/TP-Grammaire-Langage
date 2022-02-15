@@ -45,6 +45,7 @@ Symbole *Lexer::Consulter() {
 
 void Lexer::Avancer() { tampon = nullptr; }
 
+//Ajouté
 void Lexer::putSymbol(Symbole *s) {
 
   switch (*s) {
@@ -56,5 +57,5 @@ void Lexer::putSymbol(Symbole *s) {
     break;
   }
 }
-
+//Ajouté
 bool Lexer::finDuFlux() { return tete == flux.length(); }
