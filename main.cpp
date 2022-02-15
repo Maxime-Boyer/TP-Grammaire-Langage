@@ -1,5 +1,6 @@
 #include <iostream>
 #include "lexer.h"
+#include "Automate.h"
 
 
 int main(void) {
@@ -7,16 +8,12 @@ int main(void) {
    string chaine;
    
    cout << "Entrez une expression à analyser:" << endl;
-   cin >> chaine;
+   //cin >> chaine;
+   chaine = "2*(3+5)";
+   // creation de l'automate, initialisation a partir de l'expression entree par l'utilisateur
+   Automate * automate = new Automate(chaine);
+   automate->lancer();
 
-   Lexer l(chaine);
-
-   Symbole * s;
-   while(*(s=l.Consulter())!=FIN) {
-      s->Affiche();
-      cout<<endl;
-      l.Avancer();
-   }
    return 0;
 }
 

@@ -33,15 +33,18 @@ void Automate::decalage(Symbole *s, State *e) {
 void Automate::reduction(int n, Symbole *s) {
   stack<Symbole *> aEnlever;
 
+  //Depiler le bon nombre d'état et de symbole 
   for (int i = 0; i < n; i++) {
     delete (statestack.top());
     statestack.pop();
+    //Comprend pas cette ligne
     aEnlever.push(symbolstack.top());
     symbolstack.pop();
   }
 
   int val;
 
+  //Si n = 1, facile on récupère la valeur dépilée 
   if (n == 1) {
     val = aEnlever.top()->getValue();
   } else if (n == 3) {

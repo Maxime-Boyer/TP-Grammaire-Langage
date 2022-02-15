@@ -1,15 +1,22 @@
-// using namespace std;
+#pragma once
 
-// class Automate {
+ #include "lexer.h"
+ #include "symbole.h"
+ #include <stack>
+ using namespace std;
 
-// public:
-//   Automate(string flux);
-//   void decalage(Symbole *s, Etat *e);
-//   void reduction(int n, Symbole *s);
-//   void run();
+class Etat;
 
-// protected:
-//   pileSymbole<Symbole *> pileDeSymboles;
-//   pileEtat<Etat *> pileDEtats;
-//   Lexer *lexer;
-// };
+class Automate {
+
+public:
+   Automate(string flux);
+   void decalage(Symbole *symbole, Etat *etat);
+   void reduction(int n, Symbole *symbole);
+   void lancer();
+
+protected:
+   stack<Symbole *> pileSymboles;
+   stack<Etat *> pileEtats;
+   Lexer *lexer;
+ };
