@@ -13,7 +13,7 @@ int main(void) {
    // creation de l'automate, initialisation a partir de l'expression entree par l'utilisateur
    Automate * automate = new Automate(chaine);
    automate->lancer();
-
+   delete automate;
    return 0;
 }
 

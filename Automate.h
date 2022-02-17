@@ -14,6 +14,7 @@ class Automate {
 
 public:
    Automate(string flux);
+   ~Automate();
    void decalage(Symbole *symbole, Etat *etat);
    void reduction(int n, Symbole *symbole);
    void lancer();

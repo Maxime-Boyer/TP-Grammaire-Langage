@@ -34,6 +34,7 @@ void Automate::decalage(Symbole *symbole, Etat *etat) {
 void Automate::reduction(int n, Symbole *s) {
 
   stack<Symbole *> aEnlever;
+  stack<Symbole *> aEnleverMemoire;
 
   //Depiler le bon nombre d'état et de symbole 
    for (int i = 0; i < n; i++) {
@@ -41,6 +42,7 @@ void Automate::reduction(int n, Symbole *s) {
       pileEtats.pop();
       //Comprend pas cette ligne
       aEnlever.push(pileSymboles.top());
+      aEnleverMemoire.push(pileSymboles.top());
       pileSymboles.pop();
    }
 
@@ -64,6 +66,11 @@ void Automate::reduction(int n, Symbole *s) {
          val = val + aEnlever.top()->getVal();
          }
       }
+   }
+
+   for (int i = 0; i < n; i++) {
+      delete (aEnleverMemoire.top());
+      aEnleverMemoire.pop();
    }
 
    pileEtats.top()->transition(*this, new Expression(val));
@@ -94,4 +101,19 @@ void Automate::lancer(){
    } else {
       cout << "Syntaxe incorrect: caractère invalide" << endl;
    }
+}
+
+Automate::~Automate(){
+   
+   while(!pileSymboles.empty()){
+      delete (pileSymboles.top());
+      pileSymboles.pop();
+   }
+
+   while(!pileEtats.empty()){
+      delete (pileEtats.top());
+      pileEtats.pop();
+   }
+
+   delete lexer;
 }

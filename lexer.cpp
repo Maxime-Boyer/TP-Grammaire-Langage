@@ -73,3 +73,7 @@ void Lexer::putSymbol(Symbole *s) {
       break;
    }
 }
+
+Lexer::~Lexer(){
+   delete tampon;
+}
