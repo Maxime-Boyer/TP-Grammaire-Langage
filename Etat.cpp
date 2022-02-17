@@ -2,10 +2,13 @@
 #include "symbole.h"
 #include <iostream>
 
+/**
+ * @brief Constructeurs et destructeurs de Etats
+ */
+
 Etat::Etat() {}
 Etat::~Etat() {}
 Etat::Etat(int num) { rang = num; }
-int Etat::getRang() { return rang; }
 
 Etat0::Etat0() : Etat(0) {}
 Etat1::Etat1() : Etat(1) {}
@@ -17,6 +20,12 @@ Etat6::Etat6() : Etat(6) {}
 Etat7::Etat7() : Etat(7) {}
 Etat8::Etat8() : Etat(8) {}
 Etat9::Etat9() : Etat(9) {}
+
+/**
+ * @brief retourne le rang de l'état (compris entre 0 et 9)
+ * @return int : le rang de l'état
+ */
+int Etat::getRang() { return rang; }
 
 /**
  * @brief : Implementation de la ligne 0 de la table d'analyse

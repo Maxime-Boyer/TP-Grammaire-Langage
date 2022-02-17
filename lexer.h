@@ -4,6 +4,9 @@
 #include "symbole.h"
 using namespace std;
 
+/**
+ * @brief parser de l'entrée utilisateur
+ */
 class Lexer {
 
    public:
@@ -12,6 +15,7 @@ class Lexer {
 
       Symbole * Consulter();
       void Avancer();
+      void putSymbol(Symbole *s);
 
    protected:
       string flux;

@@ -5,6 +5,9 @@
 
 using namespace std;
 
+/**
+ * @brief Etats: classes stockant les procédures possibles de chaque état
+ */
 class Etat {
 
     public:

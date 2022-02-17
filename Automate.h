@@ -7,6 +7,9 @@
 
 class Etat;
 
+/**
+ * @brief Automate a états fini de l'analyseur ascendant
+ */
 class Automate {
 
 public:
@@ -19,4 +22,4 @@ protected:
    stack<Symbole *> pileSymboles;
    stack<Etat *> pileEtats;
    Lexer *lexer;
- };
+};

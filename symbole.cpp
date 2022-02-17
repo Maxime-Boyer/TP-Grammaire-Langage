@@ -23,3 +23,9 @@ void Fin::Affiche() { Symbole::Affiche(); }
 void Erreur::Affiche() { Symbole::Affiche(); }
 
 void Expression::Affiche() { Symbole::Affiche(); }
+
+int Symbole::getVal() { return -1; }
+
+int Entier::getVal() { return valeur; }
+
+int Expression::getVal() { return valeur; }
