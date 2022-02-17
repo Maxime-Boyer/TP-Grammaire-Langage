@@ -18,21 +18,76 @@ class Symbole {
       int ident;
 };
 
+class Openpar : public Symbole {
+   public:
+      Openpar() : Symbole(OPENPAR) {}
+      ~Openpar() {}
+      virtual void Affiche();
+
+   protected:
+};
+
+class Closepar : public Symbole {
+   public:
+      Closepar() : Symbole(CLOSEPAR) {}
+      ~Closepar() {}
+      virtual void Affiche();
+
+   protected:
+};
+
+class Plus : public Symbole {
+   public:
+      Plus() : Symbole(PLUS) {}
+      ~Plus() {}
+      virtual void Affiche();
+
+   protected:
+};
+
+class Mult : public Symbole {
+   public:
+      Mult() : Symbole(MULT) {}
+      ~Mult() {}
+      virtual void Affiche();
+
+   protected:
+};
+
 class Entier : public Symbole {
    public:
-      Entier(int v) : Symbole(INT), valeur(v) { }
-      ~Entier() { }
+      Entier(int v) : Symbole(INT), valeur(v) {}
+      ~Entier() {}
       virtual void Affiche();
+
    protected:
       int valeur;
 };
 
-//Ajout de la classe abstraire Expression qui hérite de la classe Symbole
+class Fin : public Symbole {
+   public:
+      Fin() : Symbole(FIN) {}
+      ~Fin() {}
+      virtual void Affiche();
+
+   protected:
+};
+
+class Erreur : public Symbole {
+   public:
+      Erreur() : Symbole(ERREUR) {}
+      ~Erreur() {}
+      virtual void Affiche();
+
+   protected:
+};
+
 class Expression : public Symbole {
    public:
-      Expression(int v) : Symbole(EXP), valeur(v) { }
-      ~Expression() { }
+      Expression(int val) : Symbole(EXP), valeur(val) {}
+      ~Expression() {}
       virtual void Affiche();
+
    protected:
       int valeur;
 };

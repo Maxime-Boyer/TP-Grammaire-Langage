@@ -6,7 +6,7 @@
       chaine: expression entree par l'utilisateur
 **/
 Automate::Automate(string chaine){
-    
+   
    // initialisation du lexer: init le flux, la tete et le tampon
    this->lexer = new Lexer(chaine);
 }
@@ -17,8 +17,12 @@ Automate::Automate(string chaine){
    - ajoute le nouvel etat à la pile des états
 **/
 void Automate::decalage(Symbole *symbole, Etat *etat) {
-  pileSymboles.push(symbole);
-  pileEtats.push(etat);
+   pileSymboles.push(symbole);
+   pileEtats.push(etat);
+}
+
+void Automate::reduction(int n, Symbole *symbole) {
+   
 }
 
 /**
@@ -27,23 +31,26 @@ void Automate::decalage(Symbole *symbole, Etat *etat) {
 void Automate::lancer(){
 
    pileEtats.push(new Etat0());
-   cout << "rang:" << pileEtats.top()->getRang() << endl;
 
    // TO DELETE
-   Symbole *symbole = lexer->Consulter();
-   lexer->Avancer();
-   pileEtats.top()->transition(*this, symbole);
-   cout << "rang:" << pileEtats.top()->getRang() << endl;
+   int i = 0;
 
-   // // tant qu'il reste des operations à traiter et qu'il n'y a pas d'erreur, on gere les transitions
-   // do{
-   //    //On lit le charactère suivant dans la chaine à lire
-   //    Symbole *symbole = lexer->Consulter();
+   // tant qu'il reste des operations à traiter et qu'il n'y a pas d'erreur, on gere les transitions
+   Symbole *symbole = nullptr;
+   do{
+      cout << "rang:" << pileEtats.top()->getRang() << endl;
+      //On lit le charactère suivant dans la chaine à lire
+      symbole = lexer->Consulter();
       
-   //    //On remet le tampon au "point mort"
-   //    lexer->Avancer(); 
+      //On remet le tampon au "point mort"
+      lexer->Avancer(); 
       
-   // }while(pileEtats.top()->transition(*this, symbole));
+      // TO DELETE
+      i++;
+      if(i>=3){
+         break;
+      }
+   }while(pileEtats.top()->transition(*this, symbole));
 }
 
 
