@@ -104,7 +104,6 @@ void Automate::Lancer(){
    // tant qu'il reste des operations à traiter et qu'il n'y a pas d'erreur, on gere les transitions
    Symbole *symbole = nullptr;
    do{
-      cout << "rang:" << pileEtats.top()->getRang() << endl;
       //On lit le charactère suivant dans la chaine à lire
       symbole = lexer->Consulter();
       
