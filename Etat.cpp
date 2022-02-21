@@ -35,23 +35,23 @@ int Etat::getRang() { return rang; }
  * 
  * @return: false si erreur, true sinon
  */
-bool Etat0::transition(Automate &automate, Symbole *symbole) {
+bool Etat0::Transition(Automate &automate, Symbole *symbole) {
 
   bool toDeleteSymbole = false;
   bool retour = true;
 
   switch (*symbole) {
   case INT:
-    automate.decalage(symbole, new Etat3);
+    automate.Decalage(symbole, new Etat3);
     break;
   case OPENPAR:
-    automate.decalage(symbole, new Etat2);
+    automate.Decalage(symbole, new Etat2);
     break;
   case EXP:
-    automate.decalage(symbole, new Etat1);
+    automate.Decalage(symbole, new Etat1);
     break;
   default:
-    automate.decalage(new Symbole(ERREUR), NULL);
+    automate.Decalage(new Symbole(ERREUR), NULL);
     toDeleteSymbole = true;
     retour = false;
   }
@@ -74,25 +74,23 @@ bool Etat0::transition(Automate &automate, Symbole *symbole) {
  * 
  * @return: false si erreur ou fin, true sinon
  */
-bool Etat1::transition(Automate &automate, Symbole *symbole) {
+bool Etat1::Transition(Automate &automate, Symbole *symbole) {
 
   bool toDeleteSymbole = false;
   bool retour = true;
 
   switch (*symbole) {
   case PLUS:
-    automate.decalage(symbole, new Etat4);
+    automate.Decalage(symbole, new Etat4);
     break;
   case MULT:
-    automate.decalage(symbole, new Etat5);
+    automate.Decalage(symbole, new Etat5);
     break;
   case FIN:
     retour = false;
-    //TODO désalloue bien mais crée 3 erreurs
-    //toDeleteSymbole = true;
     break;
   default:
-    automate.decalage(new Symbole(ERREUR), NULL);
+    automate.Decalage(new Symbole(ERREUR), NULL);
     toDeleteSymbole = true;
     retour = false;
   }
@@ -115,23 +113,23 @@ bool Etat1::transition(Automate &automate, Symbole *symbole) {
  * 
  * @return: false si erreur, true sinon
  */
-bool Etat2::transition(Automate &automate, Symbole *symbole) {
+bool Etat2::Transition(Automate &automate, Symbole *symbole) {
 
   bool retour = true;
   bool toDeleteSymbole = false;
 
   switch (*symbole) {
   case INT:
-    automate.decalage(symbole, new Etat3);
+    automate.Decalage(symbole, new Etat3);
     break;
   case OPENPAR:
-    automate.decalage(symbole, new Etat2);
+    automate.Decalage(symbole, new Etat2);
     break;
   case EXP:
-    automate.decalage(symbole, new Etat6);
+    automate.Decalage(symbole, new Etat6);
     break;
   default:
-    automate.decalage(new Symbole(ERREUR), NULL);
+    automate.Decalage(new Symbole(ERREUR), NULL);
     toDeleteSymbole = true;
     retour = false;
   }
@@ -154,30 +152,30 @@ bool Etat2::transition(Automate &automate, Symbole *symbole) {
  * 
  * @return: false si erreur, true sinon
  */
-bool Etat3::transition(Automate &automate, Symbole *symbole) {
+bool Etat3::Transition(Automate &automate, Symbole *symbole) {
 
   bool retour = true;
   bool toDeleteSymbole = false;
 
   switch (*symbole) {
   case PLUS:
-    automate.reduction(1, new Plus);
+    automate.Reduction(1, new Plus);
     toDeleteSymbole = true;
     break;
   case MULT:
-    automate.reduction(1, new Mult);
+    automate.Reduction(1, new Mult);
     toDeleteSymbole = true;
     break;
   case CLOSEPAR:
-    automate.reduction(1, new Closepar);
+    automate.Reduction(1, new Closepar);
     toDeleteSymbole = true;
     break;
   case FIN:
-    automate.reduction(1, new Fin);
+    automate.Reduction(1, new Fin);
     toDeleteSymbole = true;
     break;
   default:
-    automate.decalage(new Symbole(ERREUR), NULL);
+    automate.Decalage(new Symbole(ERREUR), NULL);
     toDeleteSymbole = true;
     retour = false;
   }
@@ -200,23 +198,23 @@ bool Etat3::transition(Automate &automate, Symbole *symbole) {
  * 
  * @return: false si erreur, true sinon
  */
-bool Etat4::transition(Automate &automate, Symbole *symbole) {
+bool Etat4::Transition(Automate &automate, Symbole *symbole) {
 
   bool retour = true;
    bool toDeleteSymbole = false;
 
   switch (*symbole) {
   case INT:
-    automate.decalage(symbole, new Etat3);
+    automate.Decalage(symbole, new Etat3);
     break;
   case OPENPAR:
-    automate.decalage(symbole, new Etat2);
+    automate.Decalage(symbole, new Etat2);
     break;
   case EXP:
-    automate.decalage(symbole, new Etat7);
+    automate.Decalage(symbole, new Etat7);
     break;
   default:
-    automate.decalage(new Symbole(ERREUR), NULL);
+    automate.Decalage(new Symbole(ERREUR), NULL);
     toDeleteSymbole = true;
     retour = false;
   }
@@ -239,23 +237,23 @@ bool Etat4::transition(Automate &automate, Symbole *symbole) {
  * 
  * @return: false si erreur, true sinon
  */
-bool Etat5::transition(Automate &automate, Symbole *symbole) {
+bool Etat5::Transition(Automate &automate, Symbole *symbole) {
 
   bool retour = true;
    bool toDeleteSymbole = false;
 
   switch (*symbole) {
   case INT:
-    automate.decalage(symbole, new Etat3);
+    automate.Decalage(symbole, new Etat3);
     break;
   case OPENPAR:
-    automate.decalage(symbole, new Etat2);
+    automate.Decalage(symbole, new Etat2);
     break;
   case EXP:
-    automate.decalage(symbole, new Etat8);
+    automate.Decalage(symbole, new Etat8);
     break;
   default:
-    automate.decalage(new Symbole(ERREUR), NULL);
+    automate.Decalage(new Symbole(ERREUR), NULL);
     toDeleteSymbole = true;
     retour = false;
   }
@@ -278,23 +276,23 @@ bool Etat5::transition(Automate &automate, Symbole *symbole) {
  * 
  * @return: false si erreur, true sinon
  */
-bool Etat6::transition(Automate &automate, Symbole *symbole) {
+bool Etat6::Transition(Automate &automate, Symbole *symbole) {
 
   bool retour = true;
   bool toDeleteSymbole = false;
 
   switch (*symbole) {
   case PLUS:
-    automate.decalage(symbole, new Etat4);
+    automate.Decalage(symbole, new Etat4);
     break;
   case MULT:
-    automate.decalage(symbole, new Etat5);
+    automate.Decalage(symbole, new Etat5);
     break;
   case CLOSEPAR:
-    automate.decalage(symbole, new Etat9);
+    automate.Decalage(symbole, new Etat9);
     break;
   default:
-    automate.decalage(new Symbole(ERREUR), NULL);
+    automate.Decalage(new Symbole(ERREUR), NULL);
     toDeleteSymbole = true;
     retour = false;
   }
@@ -317,7 +315,7 @@ bool Etat6::transition(Automate &automate, Symbole *symbole) {
  * 
  * @return: false si erreur, true sinon
  */
-bool Etat7::transition(Automate &automate, Symbole *symbole) {
+bool Etat7::Transition(Automate &automate, Symbole *symbole) {
 
   bool retour = true;
   bool toDeleteSymbole = false;
@@ -325,22 +323,22 @@ bool Etat7::transition(Automate &automate, Symbole *symbole) {
   switch (*symbole) {
   case PLUS:
     toDeleteSymbole = true;
-    automate.reduction(3, new Plus);
+    automate.Reduction(3, new Plus);
     break;
   case MULT:
-    automate.decalage(symbole, new Etat5);
+    automate.Decalage(symbole, new Etat5);
     break;
   case CLOSEPAR:
     toDeleteSymbole = true;
-    automate.reduction(3, new Closepar);
+    automate.Reduction(3, new Closepar);
     break;
   case FIN:
     toDeleteSymbole = true;
-    automate.reduction(3, new Fin);
+    automate.Reduction(3, new Fin);
     break;
   default:
     toDeleteSymbole = true;
-    automate.decalage(new Symbole(ERREUR), NULL);
+    automate.Decalage(new Symbole(ERREUR), NULL);
     retour = false;
   }
 
@@ -362,7 +360,7 @@ bool Etat7::transition(Automate &automate, Symbole *symbole) {
  * 
  * @return: false si erreur, true sinon
  */
-bool Etat8::transition(Automate &automate, Symbole *symbole) {
+bool Etat8::Transition(Automate &automate, Symbole *symbole) {
 
   bool retour = true;
   bool toDeleteSymbole = false;
@@ -370,22 +368,22 @@ bool Etat8::transition(Automate &automate, Symbole *symbole) {
   switch (*symbole) {
   case PLUS:
     toDeleteSymbole = true;
-    automate.reduction(3, new Plus);
+    automate.Reduction(3, new Plus);
     break;
   case MULT:
-    automate.reduction(3, new Mult);
+    automate.Reduction(3, new Mult);
     toDeleteSymbole = true;
     break;
   case CLOSEPAR:
-    automate.reduction(3, new Closepar);
+    automate.Reduction(3, new Closepar);
     toDeleteSymbole = true;
     break;
   case FIN:
-    automate.reduction(3, new Fin);
+    automate.Reduction(3, new Fin);
     toDeleteSymbole = true;
     break;
   default:
-    automate.decalage(new Symbole(ERREUR), NULL);
+    automate.Decalage(new Symbole(ERREUR), NULL);
     toDeleteSymbole = true;
     retour = false;
   }
@@ -408,30 +406,30 @@ bool Etat8::transition(Automate &automate, Symbole *symbole) {
  * 
  * @return: false si erreur, true sinon
  */
-bool Etat9::transition(Automate &automate, Symbole *symbole) {
+bool Etat9::Transition(Automate &automate, Symbole *symbole) {
 
   bool retour = true;
   bool toDeleteSymbole = false;
 
   switch (*symbole) {
   case PLUS:
-    automate.reduction(3, new Plus);
+    automate.Reduction(3, new Plus);
     toDeleteSymbole = true;
     break;
   case MULT:
-    automate.reduction(3, new Mult);
+    automate.Reduction(3, new Mult);
     toDeleteSymbole = true;
     break;
   case CLOSEPAR:
-    automate.reduction(3, new Closepar);
+    automate.Reduction(3, new Closepar);
     toDeleteSymbole = true;
     break;
   case FIN:
-    automate.reduction(3, new Fin);
+    automate.Reduction(3, new Fin);
     toDeleteSymbole = true;
     break;
   default:
-    automate.decalage(new Symbole(ERREUR), NULL);
+    automate.Decalage(new Symbole(ERREUR), NULL);
     toDeleteSymbole = true;
     retour = false;
   }

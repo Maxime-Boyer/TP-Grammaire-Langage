@@ -24,8 +24,8 @@ void Erreur::Affiche() { Symbole::Affiche(); }
 
 void Expression::Affiche() { Symbole::Affiche(); }
 
-int Symbole::getVal() { return -1; }
+int Symbole::ObtenirValeur() { return -1; }
 
-int Entier::getVal() { return valeur; }
+int Entier::ObtenirValeur() { return valeur; }
 
-int Expression::getVal() { return valeur; }
+int Expression::ObtenirValeur() { return valeur; }

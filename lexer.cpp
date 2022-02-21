@@ -7,34 +7,29 @@
  * @return Symbole* : le symbole lu
  */
 Symbole * Lexer::Consulter() {
-   bool isNew = false;
+
    if (!tampon) {
 
       if (tete==flux.length()){
          tampon = new Symbole(FIN);
-         isNew = true;
       }else
       {
 
          switch (flux[tete]) {
             case '(':
                tampon = new Symbole(OPENPAR);
-               isNew = true;
                tete++;
                break;
             case ')':
                tampon = new Symbole(CLOSEPAR);
-               isNew = true;
                tete++;
                break;
             case '*':
                tampon = new Symbole(MULT);
-               isNew = true;
                tete++;
                break;
             case '+':
                tampon = new Symbole(PLUS);
-               isNew = true;
                tete++;
                break;
             default:
@@ -47,16 +42,13 @@ Symbole * Lexer::Consulter() {
                   }
                   tete = tete+i;
                   tampon = new Entier(resultat);
-                  isNew = true;
                }
                else {
                   tampon = new Symbole(ERREUR);
-                  isNew = true;
                }
          }
       }
    }
-   if(isNew){pileSymbolesLu.push(tampon);}
    return tampon;
 }
 
@@ -68,11 +60,11 @@ void Lexer::Avancer() {
 }
 
 /**
- * @brief TODO retravailler, extrait du pask parrain
+ * @brief Dans le cas d'une reduction replace le tampon sur le symbole courant car il n'a pas été consommé
  * 
- * @param s 
+ * @param s symbole à replacer sur le tampon 
  */
-void Lexer::putSymbol(Symbole *s) {
+void Lexer::ReplacerTamponLecture(Symbole *s) {
 
    switch (*s) {
    case PLUS:
@@ -87,16 +79,12 @@ void Lexer::putSymbol(Symbole *s) {
    }
 }
 
+/**
+ * @brief Detruit un objet lexer
+ */
 Lexer::~Lexer(){
-   delete tampon;
 
-   while(!pileSymbolesLu.empty()){
-      if(pileSymbolesLu.top() != nullptr){ 
-         //delete (pileSymbolesLu.top()); 
-         //pileSymbolesLu.top() = nullptr;
-         //cout << "symbole lu : " << pileSymbolesLu.top() << endl;
-      }
-      pileSymbolesLu.pop();
-   }
+   //Détruit le tampon
+   delete tampon;
 
 }
