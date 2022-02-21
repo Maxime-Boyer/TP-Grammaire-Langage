@@ -1,4 +1,5 @@
 #include "lexer.h"
+#include <iostream>
 
 /**
  * @brief parser de l'entrée utilisateur
@@ -6,28 +7,34 @@
  * @return Symbole* : le symbole lu
  */
 Symbole * Lexer::Consulter() {
+   bool isNew = false;
    if (!tampon) {
 
-      if (tete==flux.length())
+      if (tete==flux.length()){
          tampon = new Symbole(FIN);
-      else
+         isNew = true;
+      }else
       {
 
          switch (flux[tete]) {
             case '(':
                tampon = new Symbole(OPENPAR);
+               isNew = true;
                tete++;
                break;
             case ')':
                tampon = new Symbole(CLOSEPAR);
+               isNew = true;
                tete++;
                break;
             case '*':
                tampon = new Symbole(MULT);
+               isNew = true;
                tete++;
                break;
             case '+':
                tampon = new Symbole(PLUS);
+               isNew = true;
                tete++;
                break;
             default:
@@ -40,13 +47,16 @@ Symbole * Lexer::Consulter() {
                   }
                   tete = tete+i;
                   tampon = new Entier(resultat);
+                  isNew = true;
                }
                else {
                   tampon = new Symbole(ERREUR);
+                  isNew = true;
                }
          }
       }
    }
+   if(isNew){pileSymbolesLu.push(tampon);}
    return tampon;
 }
 
@@ -76,4 +86,14 @@ void Lexer::putSymbol(Symbole *s) {
 
 Lexer::~Lexer(){
    delete tampon;
+
+   while(!pileSymbolesLu.empty()){
+      if(pileSymbolesLu.top() != nullptr){ 
+         //delete (pileSymbolesLu.top()); 
+         //pileSymbolesLu.top() = nullptr;
+         cout << "symbole lu : " << pileSymbolesLu.top() << endl;
+      }
+      pileSymbolesLu.pop();
+   }
+
 }

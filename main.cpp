@@ -9,7 +9,7 @@ int main(void) {
    
    cout << "Entrez une expression à analyser:" << endl;
    //cin >> chaine;
-   chaine = "2*(3+5)";
+   chaine = "2*(3+4+1)";
    // creation de l'automate, initialisation a partir de l'expression entree par l'utilisateur
    Automate * automate = new Automate(chaine);
    automate->lancer();

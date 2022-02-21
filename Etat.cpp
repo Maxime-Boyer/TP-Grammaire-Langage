@@ -36,6 +36,10 @@ int Etat::getRang() { return rang; }
  * @return: false si erreur, true sinon
  */
 bool Etat0::transition(Automate &automate, Symbole *symbole) {
+
+  bool toDeleteSymbole = false;
+  bool retour = true;
+
   switch (*symbole) {
   case INT:
     automate.decalage(symbole, new Etat3);
@@ -48,9 +52,18 @@ bool Etat0::transition(Automate &automate, Symbole *symbole) {
     break;
   default:
     automate.decalage(new Symbole(ERREUR), NULL);
-    return false;
+    toDeleteSymbole = true;
+    retour = false;
   }
-  return true;
+
+  if(toDeleteSymbole){
+    if(symbole != nullptr){ 
+        delete (symbole);
+       symbole = nullptr;
+    }
+  }
+
+  return retour;
 }
 
 /**
@@ -63,6 +76,9 @@ bool Etat0::transition(Automate &automate, Symbole *symbole) {
  */
 bool Etat1::transition(Automate &automate, Symbole *symbole) {
 
+  bool toDeleteSymbole = false;
+  bool retour = true;
+
   switch (*symbole) {
   case PLUS:
     automate.decalage(symbole, new Etat4);
@@ -71,14 +87,22 @@ bool Etat1::transition(Automate &automate, Symbole *symbole) {
     automate.decalage(symbole, new Etat5);
     break;
   case FIN:
-    return false;
+    retour = false;
     break;
   default:
     automate.decalage(new Symbole(ERREUR), NULL);
-    return false;
+    toDeleteSymbole = true;
+    retour = false;
   }
 
-  return true;
+  if(toDeleteSymbole){
+    if(symbole != nullptr){ 
+        delete (symbole);
+       symbole = nullptr;
+    }
+  }
+
+  return retour;
 }
 
 /**
@@ -90,6 +114,9 @@ bool Etat1::transition(Automate &automate, Symbole *symbole) {
  * @return: false si erreur, true sinon
  */
 bool Etat2::transition(Automate &automate, Symbole *symbole) {
+
+  bool retour = true;
+  bool toDeleteSymbole = false;
 
   switch (*symbole) {
   case INT:
@@ -103,10 +130,18 @@ bool Etat2::transition(Automate &automate, Symbole *symbole) {
     break;
   default:
     automate.decalage(new Symbole(ERREUR), NULL);
-    return false;
+    toDeleteSymbole = true;
+    retour = false;
   }
 
-  return true;
+  if(toDeleteSymbole){
+    if(symbole != nullptr){ 
+        delete (symbole);
+       symbole = nullptr;
+    }
+  }
+
+  return retour;
 }
 
 /**
@@ -119,25 +154,40 @@ bool Etat2::transition(Automate &automate, Symbole *symbole) {
  */
 bool Etat3::transition(Automate &automate, Symbole *symbole) {
 
+  bool retour = true;
+  bool toDeleteSymbole = false;
+
   switch (*symbole) {
   case PLUS:
     automate.reduction(1, new Plus);
+    toDeleteSymbole = true;
     break;
   case MULT:
     automate.reduction(1, new Mult);
+    toDeleteSymbole = true;
     break;
   case CLOSEPAR:
     automate.reduction(1, new Closepar);
+    toDeleteSymbole = true;
     break;
   case FIN:
     automate.reduction(1, new Fin);
+    toDeleteSymbole = true;
     break;
   default:
     automate.decalage(new Symbole(ERREUR), NULL);
-    return false;
+    toDeleteSymbole = true;
+    retour = false;
   }
 
-  return true;
+  if(toDeleteSymbole){
+    if(symbole != nullptr){ 
+        delete (symbole);
+       symbole = nullptr;
+    }
+  }
+
+  return retour;
 }
 
 /**
@@ -149,6 +199,9 @@ bool Etat3::transition(Automate &automate, Symbole *symbole) {
  * @return: false si erreur, true sinon
  */
 bool Etat4::transition(Automate &automate, Symbole *symbole) {
+
+  bool retour = true;
+   bool toDeleteSymbole = false;
 
   switch (*symbole) {
   case INT:
@@ -162,10 +215,18 @@ bool Etat4::transition(Automate &automate, Symbole *symbole) {
     break;
   default:
     automate.decalage(new Symbole(ERREUR), NULL);
-    return false;
+    toDeleteSymbole = true;
+    retour = false;
   }
 
-  return true;
+  if(toDeleteSymbole){
+    if(symbole != nullptr){ 
+        delete (symbole);
+       symbole = nullptr;
+    }
+  }
+
+  return retour;
 }
 
 /**
@@ -177,6 +238,9 @@ bool Etat4::transition(Automate &automate, Symbole *symbole) {
  * @return: false si erreur, true sinon
  */
 bool Etat5::transition(Automate &automate, Symbole *symbole) {
+
+  bool retour = true;
+   bool toDeleteSymbole = false;
 
   switch (*symbole) {
   case INT:
@@ -190,10 +254,18 @@ bool Etat5::transition(Automate &automate, Symbole *symbole) {
     break;
   default:
     automate.decalage(new Symbole(ERREUR), NULL);
-    return false;
+    toDeleteSymbole = true;
+    retour = false;
   }
 
-  return true;
+  if(toDeleteSymbole){
+    if(symbole != nullptr){ 
+        delete (symbole);
+       symbole = nullptr;
+    }
+  }
+
+  return retour;
 }
 
 /**
@@ -205,6 +277,9 @@ bool Etat5::transition(Automate &automate, Symbole *symbole) {
  * @return: false si erreur, true sinon
  */
 bool Etat6::transition(Automate &automate, Symbole *symbole) {
+
+  bool retour = true;
+  bool toDeleteSymbole = false;
 
   switch (*symbole) {
   case PLUS:
@@ -218,10 +293,18 @@ bool Etat6::transition(Automate &automate, Symbole *symbole) {
     break;
   default:
     automate.decalage(new Symbole(ERREUR), NULL);
-    return false;
+    toDeleteSymbole = true;
+    retour = false;
   }
 
-  return true;
+  if(toDeleteSymbole){
+    if(symbole != nullptr){ 
+        delete (symbole);
+       symbole = nullptr;
+    }
+  }
+
+  return retour;
 }
 
 /**
@@ -234,25 +317,39 @@ bool Etat6::transition(Automate &automate, Symbole *symbole) {
  */
 bool Etat7::transition(Automate &automate, Symbole *symbole) {
 
+  bool retour = true;
+  bool toDeleteSymbole = false;
+
   switch (*symbole) {
   case PLUS:
+    toDeleteSymbole = true;
     automate.reduction(3, new Plus);
     break;
   case MULT:
     automate.decalage(symbole, new Etat5);
     break;
   case CLOSEPAR:
+    toDeleteSymbole = true;
     automate.reduction(3, new Closepar);
     break;
   case FIN:
+    toDeleteSymbole = true;
     automate.reduction(3, new Fin);
     break;
   default:
+    toDeleteSymbole = true;
     automate.decalage(new Symbole(ERREUR), NULL);
-    return false;
+    retour = false;
   }
 
-  return true;
+  if(toDeleteSymbole){
+    if(symbole != nullptr){ 
+        delete (symbole);
+       symbole = nullptr;
+    }
+  }
+
+  return retour;
 }
 
 /**
@@ -265,25 +362,40 @@ bool Etat7::transition(Automate &automate, Symbole *symbole) {
  */
 bool Etat8::transition(Automate &automate, Symbole *symbole) {
 
+  bool retour = true;
+  bool toDeleteSymbole = false;
+
   switch (*symbole) {
   case PLUS:
+    toDeleteSymbole = true;
     automate.reduction(3, new Plus);
     break;
   case MULT:
     automate.reduction(3, new Mult);
+    toDeleteSymbole = true;
     break;
   case CLOSEPAR:
     automate.reduction(3, new Closepar);
+    toDeleteSymbole = true;
     break;
   case FIN:
     automate.reduction(3, new Fin);
+    toDeleteSymbole = true;
     break;
   default:
     automate.decalage(new Symbole(ERREUR), NULL);
-    return false;
+    toDeleteSymbole = true;
+    retour = false;
   }
 
-  return true;
+  if(toDeleteSymbole){
+    if(symbole != nullptr){ 
+        delete (symbole);
+       symbole = nullptr;
+    }
+  }
+
+  return retour;
 }
 
 /**
@@ -296,23 +408,38 @@ bool Etat8::transition(Automate &automate, Symbole *symbole) {
  */
 bool Etat9::transition(Automate &automate, Symbole *symbole) {
 
+  bool retour = true;
+  bool toDeleteSymbole = false;
+
   switch (*symbole) {
   case PLUS:
     automate.reduction(3, new Plus);
+    toDeleteSymbole = true;
     break;
   case MULT:
     automate.reduction(3, new Mult);
+    toDeleteSymbole = true;
     break;
   case CLOSEPAR:
     automate.reduction(3, new Closepar);
+    toDeleteSymbole = true;
     break;
   case FIN:
     automate.reduction(3, new Fin);
+    toDeleteSymbole = true;
     break;
   default:
     automate.decalage(new Symbole(ERREUR), NULL);
-    return false;
+    toDeleteSymbole = true;
+    retour = false;
   }
 
-  return true;
+  if(toDeleteSymbole){
+    if(symbole != nullptr){ 
+        delete (symbole);
+       symbole = nullptr;
+    }
+  }
+
+  return retour;
 }

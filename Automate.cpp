@@ -38,9 +38,12 @@ void Automate::reduction(int n, Symbole *s) {
 
   //Depiler le bon nombre d'état et de symbole 
    for (int i = 0; i < n; i++) {
-      delete (pileEtats.top());
+      if(pileEtats.top() != nullptr){ 
+         delete (pileEtats.top());
+         pileEtats.top() == nullptr;
+      }
       pileEtats.pop();
-      //Comprend pas cette ligne
+      
       aEnlever.push(pileSymboles.top());
       aEnleverMemoire.push(pileSymboles.top());
       pileSymboles.pop();
@@ -68,13 +71,17 @@ void Automate::reduction(int n, Symbole *s) {
       }
    }
 
-   for (int i = 0; i < n; i++) {
-      delete (aEnleverMemoire.top());
+   while (!aEnleverMemoire.empty()){
+      if(aEnleverMemoire.top() != nullptr){ 
+         delete (aEnleverMemoire.top());
+         aEnleverMemoire.top() = nullptr;
+      }
       aEnleverMemoire.pop();
    }
-
+    
    pileEtats.top()->transition(*this, new Expression(val));
-   lexer->putSymbol(s);    //TODO: pourquoi c'est utile ca?? (Aussi un TODO dans lexer.cpp)
+      //TODO: pourquoi c'est utile ca?? (Aussi un TODO dans lexer.cpp)
+   lexer->putSymbol(s);
 }
 
 /**
@@ -97,7 +104,7 @@ void Automate::lancer(){
 
    if (*pileSymboles.top() != ERREUR) {
       int resultat = pileSymboles.top()->getVal();
-      cout << "Syntaxe valise" << endl << "Résultat : " << resultat << endl;
+      cout << "Syntaxe valide" << endl << "Résultat : " << resultat << endl;
    } else {
       cout << "Syntaxe incorrect: caractère invalide" << endl;
    }
@@ -106,12 +113,18 @@ void Automate::lancer(){
 Automate::~Automate(){
    
    while(!pileSymboles.empty()){
-      delete (pileSymboles.top());
+      if(pileSymboles.top() != nullptr){ 
+         delete (pileSymboles.top());
+         pileSymboles.top() == nullptr;
+      }
       pileSymboles.pop();
    }
 
    while(!pileEtats.empty()){
-      delete (pileEtats.top());
+      if(pileEtats.top() != nullptr){ 
+         delete (pileEtats.top());
+         pileEtats.top() == nullptr;
+      }
       pileEtats.pop();
    }
 

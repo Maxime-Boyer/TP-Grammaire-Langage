@@ -2,7 +2,7 @@
 
  #include "lexer.h"
  #include "symbole.h"
- #include <stack>
+ //#include <stack>
  using namespace std;
 
 class Etat;

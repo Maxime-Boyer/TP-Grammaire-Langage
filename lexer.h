@@ -2,6 +2,7 @@
 
 #include <string>
 #include "symbole.h"
+#include <stack>
 using namespace std;
 
 /**
@@ -20,5 +21,6 @@ class Lexer {
    protected:
       string flux;
       int tete;
+      stack<Symbole *> pileSymbolesLu;
       Symbole * tampon;
 };
