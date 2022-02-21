@@ -33,13 +33,13 @@ void Automate::Decalage(Symbole *symbole, Etat *etat) {
  * @param n 
  * @param s 
  */
-void Automate::Reduction(int n, Symbole *s) {
+void Automate::Reduction(int nombreDepile, Symbole *s) {
 
-   stack<Symbole *> aEnlever;
-   stack<Symbole *> aEnleverMemoire;
+   stack<Symbole *> symbolePop;
+   stack<Symbole *> symbolePopMemoire;
 
   //Depiler le bon nombre d'état et de symbole 
-   for (int i = 0; i < n; i++) {
+   for (int i = 0; i < nombreDepile; i++) {
       if(pileEtats.top() != nullptr){ 
          delete (pileEtats.top());
          pileEtats.top() == nullptr;
@@ -48,47 +48,54 @@ void Automate::Reduction(int n, Symbole *s) {
       
       //On empile les symboles à dépiler de la pile de l'automate afin de faire les opérations 
       //et de détruire les allocations de symboles
-      aEnlever.push(pileSymboles.top());
-      aEnleverMemoire.push(pileSymboles.top());
+      symbolePop.push(pileSymboles.top());
+      symbolePopMemoire.push(pileSymboles.top());
       pileSymboles.pop();
    }
 
-   int val;
+   int valeurObtenue = 0;
 
+   //On va determiner la nouvelle valeur de l'expression réduite
    //Premier cas regle 5
-   if (n == 1) {
-      val = aEnlever.top()->ObtenirValeur();
-   } else if (n == 3) {
+   if (nombreDepile == 1) {
+      valeurObtenue = symbolePop.top()->ObtenirValeur();
+   } else if (nombreDepile == 3) {
       //Regle 4
-      if (*aEnlever.top() == OPENPAR) {
-         aEnlever.pop();
-         val = aEnlever.top()->ObtenirValeur();
+      //Si le dernier charactère empilé dans la pile symbolePop est ( on pop cette parenthèse et récupuère la valeur
+      //cela correspond à la rêgle 4
+      if (*symbolePop.top() == OPENPAR) {
+         symbolePop.pop();
+         valeurObtenue = symbolePop.top()->ObtenirValeur();
       } else {
-         val = aEnlever.top()->ObtenirValeur();
-         aEnlever.pop();
+         //Sinon on sait qu'on a la rêgle 2 ou la 3
+         //On récupère donc la première expression
+         valeurObtenue = symbolePop.top()->ObtenirValeur();
+         symbolePop.pop();
          //Regle 3
-         if (*aEnlever.top() == MULT) {
-         aEnlever.pop();
-         val = val * aEnlever.top()->ObtenirValeur();
+         //ensuite si on lit un symbole * on fait cette opération
+         if (*symbolePop.top() == MULT) {
+         symbolePop.pop();
+         valeurObtenue = valeurObtenue * symbolePop.top()->ObtenirValeur();
          } else {
          //Regle 2
-         aEnlever.pop();
-         val = val + aEnlever.top()->ObtenirValeur();
+         //sinon on lit un + logiquement
+         symbolePop.pop();
+         valeurObtenue = valeurObtenue + symbolePop.top()->ObtenirValeur();
          }
       }
    }
 
    //On détruit les symboles pop de la pile
-   while (!aEnleverMemoire.empty()){
-      if(aEnleverMemoire.top() != nullptr){ 
-         delete (aEnleverMemoire.top());
-         aEnleverMemoire.top() = nullptr;
+   while (!symbolePopMemoire.empty()){
+      if(symbolePopMemoire.top() != nullptr){ 
+         delete (symbolePopMemoire.top());
+         symbolePopMemoire.top() = nullptr;
       }
-      aEnleverMemoire.pop();
+      symbolePopMemoire.pop();
    }
     
    //On appelle la prochaine transition avec cette nouvelle expression
-   pileEtats.top()->Transition(*this, new Expression(val));
+   pileEtats.top()->Transition(*this, new Expression(valeurObtenue));
 
    //On replace enfin le tampon sur le symbole non consommé et à (re)lire
    lexer->ReplacerTamponLecture(s);
