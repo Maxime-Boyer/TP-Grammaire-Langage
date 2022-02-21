@@ -105,7 +105,7 @@ void Automate::lancer(){
    }while(pileEtats.top()->transition(*this, symbole));
 
    if (*pileSymboles.top() != ERREUR) {
-      delete symbole;
+      delete symbole; //On supprime le symbole FIN
       int resultat = pileSymboles.top()->getVal();
       cout << "Syntaxe valide" << endl << "Résultat : " << resultat << endl;
    } else {

@@ -139,7 +139,7 @@ bool Etat2::transition(Automate &automate, Symbole *symbole) {
   if(toDeleteSymbole){
     if(symbole != nullptr){ 
         delete (symbole);
-       symbole = nullptr;
+        symbole = nullptr;
     }
   }
 
@@ -185,7 +185,7 @@ bool Etat3::transition(Automate &automate, Symbole *symbole) {
   if(toDeleteSymbole){
     if(symbole != nullptr){ 
         delete (symbole);
-       symbole = nullptr;
+        symbole = nullptr;
     }
   }
 

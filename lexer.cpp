@@ -81,6 +81,9 @@ void Lexer::putSymbol(Symbole *s) {
    case CLOSEPAR:
       tampon = s;
       break;
+   case FIN:
+      delete s;
+      break;
    }
 }
 
