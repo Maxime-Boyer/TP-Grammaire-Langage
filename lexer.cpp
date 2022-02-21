@@ -91,7 +91,7 @@ Lexer::~Lexer(){
       if(pileSymbolesLu.top() != nullptr){ 
          //delete (pileSymbolesLu.top()); 
          //pileSymbolesLu.top() = nullptr;
-         cout << "symbole lu : " << pileSymbolesLu.top() << endl;
+         //cout << "symbole lu : " << pileSymbolesLu.top() << endl;
       }
       pileSymbolesLu.pop();
    }

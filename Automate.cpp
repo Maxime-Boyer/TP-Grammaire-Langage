@@ -36,6 +36,8 @@ void Automate::reduction(int n, Symbole *s) {
   stack<Symbole *> aEnlever;
   stack<Symbole *> aEnleverMemoire;
 
+  cout << "reduction" << endl;
+
   //Depiler le bon nombre d'état et de symbole 
    for (int i = 0; i < n; i++) {
       if(pileEtats.top() != nullptr){ 
@@ -80,7 +82,8 @@ void Automate::reduction(int n, Symbole *s) {
    }
     
    pileEtats.top()->transition(*this, new Expression(val));
-      //TODO: pourquoi c'est utile ca?? (Aussi un TODO dans lexer.cpp)
+   //TODO: pourquoi c'est utile ca?? (Aussi un TODO dans lexer.cpp)
+
    lexer->putSymbol(s);
 }
 
@@ -108,6 +111,8 @@ void Automate::lancer(){
    } else {
       cout << "Syntaxe incorrect: caractère invalide" << endl;
    }
+
+   delete symbole;
 }
 
 Automate::~Automate(){
