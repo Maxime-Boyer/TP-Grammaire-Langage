@@ -33,10 +33,10 @@ void Automate::decalage(Symbole *symbole, Etat *etat) {
  */
 void Automate::reduction(int n, Symbole *s) {
 
-  stack<Symbole *> aEnlever;
-  stack<Symbole *> aEnleverMemoire;
+   stack<Symbole *> aEnlever;
+   stack<Symbole *> aEnleverMemoire;
 
-  cout << "reduction" << endl;
+   cout << "reduction" << endl;
 
   //Depiler le bon nombre d'état et de symbole 
    for (int i = 0; i < n; i++) {
@@ -53,7 +53,6 @@ void Automate::reduction(int n, Symbole *s) {
 
    int val;
 
-   //Si n = 1, facile on récupère la valeur dépilée 
    if (n == 1) {
       val = aEnlever.top()->getVal();
    } else if (n == 3) {
@@ -106,17 +105,16 @@ void Automate::lancer(){
    }while(pileEtats.top()->transition(*this, symbole));
 
    if (*pileSymboles.top() != ERREUR) {
+      delete symbole;
       int resultat = pileSymboles.top()->getVal();
       cout << "Syntaxe valide" << endl << "Résultat : " << resultat << endl;
    } else {
       cout << "Syntaxe incorrect: caractère invalide" << endl;
    }
-
-   delete symbole;
 }
 
 Automate::~Automate(){
-   
+
    while(!pileSymboles.empty()){
       if(pileSymboles.top() != nullptr){ 
          delete (pileSymboles.top());

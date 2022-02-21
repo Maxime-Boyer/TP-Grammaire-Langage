@@ -59,7 +59,7 @@ bool Etat0::transition(Automate &automate, Symbole *symbole) {
   if(toDeleteSymbole){
     if(symbole != nullptr){ 
         delete (symbole);
-       symbole = nullptr;
+        symbole = nullptr;
     }
   }
 
@@ -88,6 +88,8 @@ bool Etat1::transition(Automate &automate, Symbole *symbole) {
     break;
   case FIN:
     retour = false;
+    //TODO désalloue bien mais crée 3 erreurs
+    //toDeleteSymbole = true;
     break;
   default:
     automate.decalage(new Symbole(ERREUR), NULL);
