@@ -71,16 +71,27 @@ void Automate::Reduction(int nombreDepile, Symbole *s) {
          //On récupère donc la première expression
          valeurObtenue = symbolePop.top()->ObtenirValeur();
          symbolePop.pop();
+
+         //On récupère l'opérateur et le pop de la pile ensuite
+         Symbole operateur = *symbolePop.top();
+         symbolePop.pop();
+
+         switch (operateur)
+         {
+         case MULT:
          //Regle 3
-         //ensuite si on lit un symbole * on fait cette opération
-         if (*symbolePop.top() == MULT) {
-         symbolePop.pop();
-         valeurObtenue = valeurObtenue * symbolePop.top()->ObtenirValeur();
-         } else {
+            valeurObtenue = valeurObtenue * symbolePop.top()->ObtenirValeur();
+            break;
          //Regle 2
-         //sinon on lit un + logiquement
-         symbolePop.pop();
-         valeurObtenue = valeurObtenue + symbolePop.top()->ObtenirValeur();
+         case PLUS:
+            valeurObtenue = valeurObtenue + symbolePop.top()->ObtenirValeur();
+            break;
+         /*
+         *  Si on voulait rajouter des rêgles avec les opérateurs - et / il faudrait simplement rajouter des
+         *  case dans le switch avec le bon symbole 
+         */
+         default:
+            break;
          }
       }
    }
