@@ -32,3 +32,4 @@
 *.app
 analyse
 .vscode
+.DS_Store
