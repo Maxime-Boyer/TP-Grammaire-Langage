@@ -20,7 +20,7 @@ main.o: main.cpp symbole.h lexer.h Etat.h
 	g++ -o main.o -c main.cpp
 
 clean:
-	rm -rf *.o
+	rm -rf *.o analyse
 
 mrproper: clean
 	rm -rf analyse
