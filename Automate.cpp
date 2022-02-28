@@ -42,7 +42,7 @@ void Automate::Reduction(int nombreDepile, Symbole *s) {
    for (int i = 0; i < nombreDepile; i++) {
       if(pileEtats.top() != nullptr){ 
          delete (pileEtats.top());
-         pileEtats.top() == nullptr;
+         pileEtats.top() = nullptr;
       }
       pileEtats.pop();
       
@@ -104,7 +104,7 @@ void Automate::Reduction(int nombreDepile, Symbole *s) {
       }
       symbolePopMemoire.pop();
    }
-    
+   
    //On appelle la prochaine transition avec cette nouvelle expression
    pileEtats.top()->Transition(*this, new Expression(valeurObtenue));
 
@@ -147,7 +147,7 @@ Automate::~Automate(){
    while(!pileSymboles.empty()){
       if(pileSymboles.top() != nullptr){ 
          delete (pileSymboles.top());
-         pileSymboles.top() == nullptr;
+         pileSymboles.top() = nullptr;
       }
       pileSymboles.pop();
    }
@@ -156,7 +156,7 @@ Automate::~Automate(){
    while(!pileEtats.empty()){
       if(pileEtats.top() != nullptr){ 
          delete (pileEtats.top());
-         pileEtats.top() == nullptr;
+         pileEtats.top() = nullptr;
       }
       pileEtats.pop();
    }
